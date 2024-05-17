@@ -1,0 +1,37 @@
+# FOURJS_START_COPYRIGHT(P,2021)
+# Property of Four Js*
+# (c) Copyright Four Js 2021, 2023. All Rights Reserved.
+# * Trademark of Four Js Development Tools Europe Ltd
+#   in the United States and elsewhere
+# FOURJS_END_COPYRIGHT
+
+[server]
+# FLM service host
+host="localhost"
+
+# FLM service port
+# port=6800
+
+[license]
+# License to use with FLM service
+number="TAB#xxxxxxxx"
+
+# Number of requests between active users check
+# user.check=5
+
+[log]
+# Enable / disable logging - values: true | false
+enabled=false
+
+# To use the file logger
+# Directory where log files are generated
+# If not defined no files are created.
+# directory="/tmp"
+
+# To use the console logger
+# console=true
+
+# To use the syslog logger
+# syslog=true
+
+# categories="error,warning,info" #,debug

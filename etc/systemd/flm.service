@@ -1,0 +1,31 @@
+# Installed in the global system ..
+#
+# copy to /lib/systemd/system/flm.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable flm.service
+# sudo systemctl start flm.service
+# sudo systemctl status flm.service
+#
+
+[Unit]
+Description=FourJs License Manager 6
+After=network.target nss-lookup.target
+Documentation=https://4js.com/online_documentation/fjs-flm-manual-html
+
+[Service]
+Type=exec
+User=fourjs
+Environment="FLMDIR=/opt/fourjs/flm6"
+#ExecSearchPath=/opt/fourjs/flm6/bin
+ExecStartPre=/opt/fourjs/flm6/bin/flmprg -a env
+ExecStart=/opt/fourjs/flm6/bin/flmprg -D
+ExecReload=/opt/fourjs/flm6/bin/flmprg --service-restart
+ExecStop=/opt/fourjs/flm6/bin/flmprg --service-stop
+KillMode=mixed
+Restart=on-abort
+SuccessExitStatus=SIGTERM 0
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+

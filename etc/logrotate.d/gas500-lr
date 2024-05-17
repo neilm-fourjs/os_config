@@ -1,0 +1,13 @@
+"/opt/fourjs/gas500_appdata/log/fastcgidispatch/*/*.log" {
+  daily
+  su informix informix
+  missingok
+  nocompress
+  nocreate
+  nodateext
+  postrotate
+        find /opt/fourjs/gas500_appdata/log/fastcgidispatch -type f -name \*.1 -daystart -mtime +1 -exec bzip2 {} \;
+        find /opt/fourjs/gas500_appdata/log/fastcgidispatch -type f -name \*.bz2 -daystart -mtime +21 -exec rm -f {} \;
+        find /opt/fourjs/gas500_appdata/log/fastcgidispatch -type d -daystart -mtime +5 -name 20\* -exec rmdir --ignore-fail-on-non-empty {} \;
+  endscript
+}

@@ -1,0 +1,37 @@
+# Installed in the global system ..
+#
+# copy to /lib/systemd/system/gas321.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable gas321.service
+# sudo systemctl start gas321.service
+# sudo systemctl status gas321.service
+#
+
+[Unit]
+Description=Genero Application Server 3.21
+After=network.target nss-lookup.target
+Documentation=https://4js.com/online_documentation/fjs-gas-manual-html/
+
+[Service]
+Type=exec
+User=informix
+Environment=FGLASDIR=/opt/fourjs/gas321
+EnvironmentFile=/opt/fourjs/gas321_appdata/gas.env
+ExecSearchPath=/opt/fourjs/gas321/bin
+ExecStart=/opt/fourjs/gas321/bin/fastcgidispatch -s -E res.ic.port.offset=20 -E res.appdata.path=/opt/fourjs/gas321_appdata -E res.path.idp=/opt/fourjs/gas321_appdata/ -E res.ic.admin.port=6998 -E res.path.user=/opt/informix/bin -E app.timeout.useragent=1200 -E app.timeout.requestresult=90
+ExecStop=/bin/kill -s TERM $MAINPID
+# KillMode=process -> only the dispatcher killed, proxies remain but many warnings in logs
+#                     sessions remain valid if dispatcher restarts.
+# KillMode=mixed -> dispatcher and proxies are killed -> all sessions lost.
+KillMode=mixed
+Restart=on-abort
+RestartSec=5
+SuccessExitStatus=SIGTERM 0
+
+# If files are generated in /tmp and external apps expect to have access to it,
+# either change PrivateTmp to false, or change the output directory for these files.
+#PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+
