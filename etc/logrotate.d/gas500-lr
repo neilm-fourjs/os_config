@@ -1,6 +1,6 @@
 "/opt/fourjs/gas500_appdata/log/fastcgidispatch/*/*.log" {
   daily
-  su informix informix
+  su fourjs fourjs
   missingok
   nocompress
   nocreate
