@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>GAS500</short>
+  <description>Genero Application Server fastcgidispatch - version 5.00</description>
+  <port protocol="tcp" port="6350"/>
+</service>

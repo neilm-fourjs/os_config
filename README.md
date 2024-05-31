@@ -76,6 +76,19 @@ $ systemctl daemon-reload
 $ systemctl enable gas500.service
 $ systemctl start gas500.service
 ```
+
+### GAS Firewalld
+
+As root:
+
+```
+$ cd $REPO/etc/firewalld
+$ firewall-cmd --permanent --new-service-from-file=gas500.xml
+$ firewall-cmd --permanent --add-service=gas500
+$ firewall-cmd --reload
+```
+
+
 ### To configure GIP:
 
 Enable the startApp, by default it's disabled for example access.
